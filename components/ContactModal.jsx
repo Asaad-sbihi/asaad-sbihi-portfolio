@@ -20,7 +20,7 @@ export default function ContactModal() {
   const { isOpen, closeModal, topic, setTopic } = useModal();
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | pending | error
   const panelRef = useRef(null);
   const firstFieldRef = useRef(null);
   const lastFocused = useRef(null);
@@ -117,7 +117,30 @@ export default function ContactModal() {
           _captcha: "false",
         }),
       });
-      setStatus(res.ok ? "sent" : "error");
+
+      // Both providers answer 200 even when the message was NOT delivered, so
+      // the JSON body is the real signal:
+      //   Formspree   -> { ok: true } | { errors: [...] }
+      //   FormSubmit  -> { success: "true" } | { success: "false", message }
+      //                  (success:"false" until SITE.email is confirmed once)
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        /* non-JSON body — fall through to the res.ok check below */
+      }
+      const delivered =
+        data.ok === true || data.success === true || data.success === "true";
+
+      if (delivered || (res.ok && data.ok === undefined && data.success === undefined)) {
+        setStatus("sent");
+      } else if (!FORMSPREE_ID && res.ok) {
+        // FormSubmit accepted the request but is holding it: the address
+        // still needs its one-time email confirmation.
+        setStatus("pending");
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -173,6 +196,14 @@ export default function ContactModal() {
                 </button>
               ))}
             </div>
+
+            {status === "pending" && (
+              <div className="modal__status modal__status--info" role="status">
+                Almost there — FormSubmit just emailed a one-time confirmation link
+                to the site owner. Once that link is clicked, send this again and it
+                will arrive. Nothing is lost in the meantime.
+              </div>
+            )}
 
             {status === "error" && (
               <div className="modal__status modal__status--err" role="alert">
