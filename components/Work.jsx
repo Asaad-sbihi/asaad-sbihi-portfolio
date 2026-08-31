@@ -57,7 +57,7 @@ export default function Work() {
                 key={`${filter}-${p.title}`}
                 {...linkProps}
               >
-                <div className="project__vis">
+                <div className={`project__vis${p.logo ? " project__vis--logo" : ""}`}>
                   {p.image ? (
                     <Image src={p.image} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw" />
                   ) : (
