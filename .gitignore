@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+.env.local
+.DS_Store
+*.log
+
+# machine-specific dev-server launch config
+.claude/launch.json
