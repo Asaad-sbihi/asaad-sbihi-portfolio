@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 285" width="900" height="285">
+  <defs>
+    <style>
+      .word-agri { font-family: 'Poppins'; font-weight: 700; }
+      .word-connect { font-family: 'Poppins'; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- ICON: leaf + connectivity node -->
+  <g transform="translate(20,45)">
+    <!-- leaf silhouette -->
+    <path d="M110,10
+             C165,45 200,105 110,220
+             C20,105 55,45 110,10 Z"
+          fill="#1B4332"/>
+    <!-- inner fresh-green facet for depth (flat, no gradient) -->
+    <path d="M110,10
+             C145,55 155,130 110,220
+             C110,220 110,220 110,220
+             L110,10 Z"
+          fill="#2F7A55"/>
+    <!-- center vein -->
+    <path d="M110,205 C108,150 112,80 110,28"
+          fill="none" stroke="#D8F3DC" stroke-width="5" stroke-linecap="round"/>
+    <!-- side veins -->
+    <path d="M110,150 L82,120 M110,150 L138,120 M110,110 L86,86 M110,110 L134,86"
+          fill="none" stroke="#D8F3DC" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+    <!-- connectivity node cluster (tech accent) -->
+    <line x1="110" y1="14" x2="168" y2="-28" stroke="#3A6EA5" stroke-width="5" stroke-linecap="round"/>
+    <line x1="168" y1="-28" x2="214" y2="-8" stroke="#3A6EA5" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="110" cy="14" r="9" fill="#E9C46A"/>
+    <circle cx="168" cy="-28" r="10" fill="#3A6EA5"/>
+    <circle cx="214" cy="-8" r="7" fill="#3A6EA5"/>
+  </g>
+
+  <!-- WORDMARK -->
+  <text x="270" y="150" font-size="86" class="word-agri" fill="#1B4332">Agri<tspan class="word-connect" fill="#3A6EA5">Connect</tspan></text>
+  <!-- tagline -->
+  <text x="272" y="190" font-family="Poppins" font-weight="500" font-size="24" letter-spacing="3" fill="#8C8578">FROM FIELD TO YOU</text>
+</svg>

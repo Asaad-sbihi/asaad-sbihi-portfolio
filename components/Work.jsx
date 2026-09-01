@@ -6,12 +6,15 @@ import Reveal from "@/components/Reveal";
 import { FILTERS, PROJECTS } from "@/lib/content";
 
 export default function Work() {
+  // `filter` holds a tag value ("All" | "Développement" | "Design" | "Media" | "Ads")
   const [filter, setFilter] = useState("All");
 
   const visible = useMemo(
     () => PROJECTS.filter((p) => filter === "All" || p.tags.includes(filter)),
     [filter]
   );
+
+  const activeLabel = FILTERS.find((f) => f.tag === filter)?.label ?? filter;
 
   return (
     <section className="work" id="projects">
@@ -25,12 +28,12 @@ export default function Work() {
           <div className="filters" role="group" aria-label="Filter projects">
             {FILTERS.map((f) => (
               <button
-                key={f}
+                key={f.tag}
                 className="chip"
-                aria-pressed={filter === f}
-                onClick={() => setFilter(f)}
+                aria-pressed={filter === f.tag}
+                onClick={() => setFilter(f.tag)}
               >
-                {f}
+                {f.label}
               </button>
             ))}
           </div>
@@ -39,7 +42,7 @@ export default function Work() {
         <div className="grid">
           {visible.length === 0 && (
             <article className="project project--empty">
-              <p>No projects tagged “{filter}” yet.</p>
+              <p>No projects tagged “{activeLabel}” yet.</p>
             </article>
           )}
 
@@ -59,7 +62,14 @@ export default function Work() {
               >
                 <div className={`project__vis${p.logo ? " project__vis--logo" : ""}`}>
                   {p.image ? (
-                    <Image src={p.image} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw" />
+                    p.image.endsWith(".svg") ? (
+                      // SVGs are served straight from /public — the image
+                      // optimizer would send them as attachments and not render.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={p.image} alt={p.title} loading="lazy" />
+                    ) : (
+                      <Image src={p.image} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw" />
+                    )
                   ) : (
                     <span>0{i + 1}</span>
                   )}
