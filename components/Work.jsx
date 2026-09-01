@@ -2,12 +2,16 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import ProjectModal from "@/components/ProjectModal";
 import Reveal from "@/components/Reveal";
 import { FILTERS, PROJECTS } from "@/lib/content";
 
 export default function Work() {
   // `filter` holds a tag value ("All" | "Développement" | "Design" | "Media" | "Ads")
   const [filter, setFilter] = useState("All");
+
+  // The project whose case-study modal is open, or null. (isModalOpen === !!activeCase)
+  const [activeCase, setActiveCase] = useState(null);
 
   const visible = useMemo(
     () => PROJECTS.filter((p) => filter === "All" || p.tags.includes(filter)),
@@ -47,9 +51,14 @@ export default function Work() {
           )}
 
           {visible.map((p, i) => {
-            const Tag = p.url ? "a" : "article";
-            const linkProps = p.url
+            // A card can link out (p.url), open a case study (p.caseStudy),
+            // or be static.
+            const hasCase = !!p.caseStudy;
+            const Tag = p.url ? "a" : hasCase ? "button" : "article";
+            const interactiveProps = p.url
               ? { href: p.url, target: "_blank", rel: "noopener noreferrer" }
+              : hasCase
+              ? { type: "button", onClick: () => setActiveCase(p) }
               : {};
 
             return (
@@ -58,7 +67,7 @@ export default function Work() {
                 className="project"
                 delay={i * 70}
                 key={`${filter}-${p.title}`}
-                {...linkProps}
+                {...interactiveProps}
               >
                 <div className={`project__vis${p.logo ? " project__vis--logo" : ""}`}>
                   {p.image ? (
@@ -82,11 +91,15 @@ export default function Work() {
                       <span key={t}>{t}</span>
                     ))}
                   </div>
-                  {p.url && (
+                  {(p.url || hasCase) && (
                     <span className="project__go">
-                      View project
+                      {p.url ? "View project" : "View details"}
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M7 17L17 7M8 7h9v9" />
+                        {p.url ? (
+                          <path d="M7 17L17 7M8 7h9v9" />
+                        ) : (
+                          <path d="M5 12h14M13 6l6 6-6 6" />
+                        )}
                       </svg>
                     </span>
                   )}
@@ -96,6 +109,8 @@ export default function Work() {
           })}
         </div>
       </div>
+
+      <ProjectModal project={activeCase} onClose={() => setActiveCase(null)} />
     </section>
   );
 }
