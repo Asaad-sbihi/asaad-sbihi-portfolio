@@ -7,3 +7,7 @@ out
 
 # machine-specific dev-server launch config
 .claude/launch.json
+
+# raw / oversized source media — commit compressed web versions only
+public/**/IMG_*.mp4
+public/**/*.mov

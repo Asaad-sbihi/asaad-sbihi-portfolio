@@ -141,6 +141,48 @@ export default function ProjectModal({ project, onClose }) {
             <p className="pmodal__intro">{study.intro}</p>
             {study.role && <p className="pmodal__role">{study.role}</p>}
 
+            {study.sections?.map((sec, i) => (
+              <section className="pmodal__sec" key={i}>
+                {sec.heading && <h3 className="pmodal__h3">{sec.heading}</h3>}
+                {sec.body && <p className="pmodal__text">{sec.body}</p>}
+              </section>
+            ))}
+
+            {study.video && (
+              <section className="pmodal__sec">
+                {study.video.heading && <h3 className="pmodal__h3">{study.video.heading}</h3>}
+                <div className="pmodal__video">
+                  {study.video.src && !brokenImgs.video ? (
+                    <video
+                      src={study.video.src}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={study.video.poster || undefined}
+                      onError={() => setBrokenImgs((b) => ({ ...b, video: true }))}
+                    />
+                  ) : (
+                    <div className="pmodal__video-ph">
+                      <span>{study.video.label || "Video showcase"}</span>
+                    </div>
+                  )}
+                </div>
+                {study.video.label && <p className="pmodal__vidlabel">{study.video.label}</p>}
+                {study.video.note && <p className="pmodal__text">{study.video.note}</p>}
+              </section>
+            )}
+
+            {study.tools?.length > 0 && (
+              <section className="pmodal__sec">
+                <h3 className="pmodal__h3">Tools Used</h3>
+                <ul className="pmodal__tools">
+                  {study.tools.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             {study.compare && (
               <section className="pmodal__cmp">
                 <h3 className="pmodal__h3">Avant vs Après — Charte Graphique</h3>

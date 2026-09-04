@@ -355,6 +355,7 @@ body.menu-open .menu{clip-path:circle(150% at calc(100% - 60px) 48px);
 .railcard--2{background:linear-gradient(155deg,#03306f,#0d54ae)}
 .railcard--3{background:linear-gradient(155deg,#8c3d1e,#d17a4a)}
 .railcard--4{background:linear-gradient(155deg,#e8e8e5,#ffffff);color:var(--ink)}
+.railcard--5{background:linear-gradient(155deg,#141416,#3b3b40)}
 .railcard::after{
   content:"";position:absolute;inset:0;
   background-image:repeating-linear-gradient(0deg,currentColor 0 1px,transparent 1px 40px),
@@ -636,6 +637,21 @@ button.project{width:100%;text-align:left;font:inherit;appearance:none}
 .pmodal__intro{margin:0 0 16px;font-size:15px;color:var(--ink-60);max-width:66ch;line-height:1.65}
 .pmodal__role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--ink-60);margin:0 0 30px;padding-top:14px;border-top:1px solid rgba(11,11,12,.1)}
+
+/* ---- prose sections / video showcase / tools ---- */
+.pmodal__sec{margin-bottom:32px}
+.pmodal__text{margin:0 0 12px;font-size:14.5px;color:var(--ink-60);line-height:1.65;max-width:66ch}
+.pmodal__video{border-radius:var(--r-sm);overflow:hidden;background:#0b0b0c;
+  border:1px solid rgba(11,11,12,.12);display:flex;justify-content:center}
+.pmodal__video video{display:block;max-width:100%;max-height:72vh;width:auto;height:auto;background:#0b0b0c}
+.pmodal__video-ph{width:100%;aspect-ratio:16/9;display:grid;place-items:center;background:#eef1f6}
+.pmodal__video-ph span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-60);padding:16px;text-align:center}
+.pmodal__vidlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-60);margin:12px 0 10px}
+.pmodal__tools{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pmodal__tools li{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-60);
+  border:1px solid rgba(11,11,12,.16);border-radius:100px;padding:7px 14px}
 
 /* 2 columns on desktop, 1 on mobile */
 .pmodal__gallery{display:grid;grid-template-columns:1fr 1fr;gap:18px}

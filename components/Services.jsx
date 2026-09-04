@@ -90,8 +90,8 @@ export default function Services() {
               of the stack
             </h2>
             <p>
-              Four layers, one delivery: interface, server, model, and the craft that holds them
-              together. Drag or use the arrows to see what I actually work with.
+              Five layers, one delivery: interface, server, marketing, design, and the motion that
+              ties them together. Drag or use the arrows to see what I actually work with.
             </p>
             <button className="btn" onClick={() => openModal("brief")}>
               Start a project
