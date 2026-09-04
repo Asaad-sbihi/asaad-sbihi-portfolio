@@ -104,15 +104,14 @@ export default function Hero() {
         </div>
         <code>
           <span className="k">const</span> asaad = {"{"}
-          {"\n  role: "}<span className="s">&quot;Full-Stack AI Engineer&quot;</span>,
-          {"\n  stack: ["}
-          <span className="s">&quot;React&quot;</span>{", "}
-          <span className="s">&quot;Next.js&quot;</span>{", "}
-          <span className="s">&quot;Laravel&quot;</span>,
+          {"\n  role: "}<span className="s">&quot;Visual Creator × Developer&quot;</span>,
+          {"\n  craft: ["}
+          <span className="s">&quot;Branding&quot;</span>{", "}
+          <span className="s">&quot;Motion&quot;</span>{", "}
+          <span className="s">&quot;Print&quot;</span>,
           {"\n          "}
-          <span className="s">&quot;Python&quot;</span>{", "}
-          <span className="s">&quot;LLMs&quot;</span>{"],"}
-          {"\n  focus: "}<span className="s">&quot;AI-Powered Systems&quot;</span>,
+          <span className="s">&quot;Web&quot;</span>{"],"}
+          {"\n  tools: "}<span className="s">&quot;Ae · Pr · Ai · Figma · Next&quot;</span>,
           {"\n  shipping: "}<span className="s">{typed}</span>
           <span className="caret" />
           {"\n}"}
@@ -131,7 +130,7 @@ export default function Hero() {
             <div className="gcard__thumb">&lt;/&gt;</div>
             <div>
               <p className="gcard__label">Selected work</p>
-              <p className="gcard__text">AI products shipped to production, not demos.</p>
+              <p className="gcard__text">Brand, motion and product — shipped end to end.</p>
               <span className="gcard__link">See projects →</span>
             </div>
           </a>
@@ -140,7 +139,7 @@ export default function Hero() {
             <div>
               <p className="gcard__label">Since 2024</p>
               <p className="gcard__big">3 yrs</p>
-              <p className="gcard__text">shipping web products end to end</p>
+              <p className="gcard__text">designing and shipping across disciplines</p>
             </div>
             <div className="dots" aria-hidden="true">
               <i /><i /><i />

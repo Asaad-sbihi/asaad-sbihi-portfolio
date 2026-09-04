@@ -23,7 +23,9 @@
   --mono:var(--font-mono),ui-monospace,monospace;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* reserve the scrollbar gutter so opening a modal (body overflow:hidden)
+   doesn't shift the whole layout sideways */
+html{scroll-behavior:smooth;scrollbar-gutter:stable}
 section[id]{scroll-margin-top:96px}
 body{
   margin:0;background:var(--paper);color:var(--ink);
@@ -641,10 +643,14 @@ button.project{width:100%;text-align:left;font:inherit;appearance:none}
 /* ---- prose sections / video showcase / tools ---- */
 .pmodal__sec{margin-bottom:32px}
 .pmodal__text{margin:0 0 12px;font-size:14.5px;color:var(--ink-60);line-height:1.65;max-width:66ch}
-.pmodal__video{border-radius:var(--r-sm);overflow:hidden;background:#0b0b0c;
-  border:1px solid rgba(11,11,12,.12);display:flex;justify-content:center}
-.pmodal__video video{display:block;max-width:100%;max-height:72vh;width:auto;height:auto;background:#0b0b0c}
-.pmodal__video-ph{width:100%;aspect-ratio:16/9;display:grid;place-items:center;background:#eef1f6}
+/* fixed 16:9 stage — the <video> and the placeholder both fill it, so there's
+   no layout shift when metadata loads and no way for the asset to overflow */
+.pmodal__video{position:relative;aspect-ratio:16/9;border-radius:var(--r-sm);overflow:hidden;
+  background:#0b0b0c;border:1px solid rgba(11,11,12,.12)}
+.pmodal__video video,
+.pmodal__video-ph{position:absolute;inset:0;width:100%;height:100%}
+.pmodal__video video{object-fit:contain;background:#0b0b0c}
+.pmodal__video-ph{display:grid;place-items:center;background:#eef1f6}
 .pmodal__video-ph span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-60);padding:16px;text-align:center}
 .pmodal__vidlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
@@ -690,9 +696,9 @@ button.project{width:100%;text-align:left;font:inherit;appearance:none}
 .pmodal__side--before .pmodal__badge{background:rgba(11,11,12,.06);color:var(--ink-60)}
 .pmodal__side--after .pmodal__badge{background:var(--ink);color:#fff}
 /* comparison frames show the full feed sheet, not a cropped square */
-.pmodal__side .pmodal__frame{position:static;aspect-ratio:auto;min-height:170px;display:block}
-.pmodal__side .pmodal__frame img{position:static;inset:auto;width:100%;height:auto;transition:none}
-.pmodal__side .pmodal__frame span{display:grid;place-items:center;min-height:170px}
+.pmodal__side .pmodal__frame{position:static;aspect-ratio:auto;display:block}
+.pmodal__side .pmodal__frame img{position:static;inset:auto;display:block;width:100%;height:auto;transition:none}
+.pmodal__side .pmodal__frame span{display:grid;place-items:center;min-height:180px}
 @media (max-width:640px){
   .pmodal__gallery{grid-template-columns:1fr}
   .pmodal__sides--both{grid-template-columns:1fr}
