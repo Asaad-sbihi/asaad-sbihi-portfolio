@@ -1,5 +1,6 @@
 import { Archivo, IBM_Plex_Mono, Inter } from "next/font/google";
 import { ModalProvider } from "@/context/ModalContext";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { SITE } from "@/lib/content";
 import "./globals.css";
 
@@ -24,16 +25,22 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const TITLE = `${SITE.name} — ${SITE.role}`;
+
 export const metadata = {
   metadataBase: new URL("https://asaadsbihi.com"), // change to your real domain
-  title: `${SITE.name} — ${SITE.role}`,
-  description:
-    "Full-Stack developer in Casablanca building intelligent web apps with React, Next.js, Laravel, Python and LLMs.",
+  title: TITLE,
+  description: SITE.tagline,
   openGraph: {
-    title: `${SITE.name} — ${SITE.role}`,
-    description: "Intelligent web apps, built to scale.",
+    title: TITLE,
+    description: SITE.tagline,
     type: "website",
-    locale: "en_US",
+    locale: "fr_FR",
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: SITE.tagline,
   },
 };
 
@@ -46,6 +53,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${archivo.variable} ${inter.variable} ${mono.variable}`}>
       <body>
         <ModalProvider>{children}</ModalProvider>
+        <WhatsAppButton />
       </body>
     </html>
   );

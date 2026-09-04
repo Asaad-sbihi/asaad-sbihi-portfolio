@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="foot">
       <span>© {new Date().getFullYear()} {SITE.name}</span>
-      <span>Full-Stack + AI · Casablanca</span>
+      <span>Design + Motion + Code · Casablanca</span>
     </footer>
   );
 }
